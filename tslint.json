@@ -65,6 +65,10 @@
     ],
     "no-internal-module": true,
     "no-trailing-whitespace": true,
-    "no-inferrable-types": true
+    "no-inferrable-types": true,
+    "no-floating-promises": true,
+    "no-for-in-array": true,
+    "promise-function-async": true,
+    "no-namespace": true
   }
 }

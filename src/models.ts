@@ -1,4 +1,4 @@
-interface Environment {
+export interface Environment {
   // Browser user agent
   userAgent: string;
 
@@ -21,7 +21,7 @@ interface Environment {
   screenHeight: number;
 }
 
-interface ErrorStackTrace {
+export interface ErrorStackTrace {
   // Trace line
   row: number;
 
@@ -35,7 +35,7 @@ interface ErrorStackTrace {
   file: string;
 }
 
-interface ErrorTrace {
+export interface ErrorTrace {
   // The full error trace string
   string: string;
 
@@ -43,7 +43,7 @@ interface ErrorTrace {
   stack: ErrorStackTrace[];
 }
 
-interface ErrorData {
+export interface ErrorData {
   // The date and time of the captured error
   date: Date;
 
@@ -63,7 +63,7 @@ interface ErrorData {
   handled: boolean;
 }
 
-interface ErrorReport {
+export interface ErrorReport {
   // Version of the report format
   version: number;
 
