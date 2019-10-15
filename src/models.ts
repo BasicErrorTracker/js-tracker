@@ -19,6 +19,9 @@ export interface Environment {
 
   // Screen height
   screenHeight: number;
+
+  // The platform of the machine
+  platform: string;
 }
 
 export interface ErrorStackTrace {
