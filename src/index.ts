@@ -7,14 +7,16 @@ let sessionId: string;
 
 const stackTraceLineRegex = /^\s+at\s(\S+)\s\((.+):(\d+):(\d+)\)$/;
 
-export default function InitializeErrorTracker() {
+function InitializeErrorTracker() {
   sessionId = generateUUIDv4();
 
-  window.addEventListener("error", (error: ErrorEvent) => {
-    console.log(prepareReport(error));
-  });
+  window.addEventListener("error", ReportError);
 
   console.debug('Error Tracker Initialized!');
+}
+
+export default function ReportError(error: ErrorEvent) {
+  console.log(prepareReport(error));
 }
 
 function prepareReport(error: ErrorEvent): ErrorReport {
@@ -46,7 +48,7 @@ function parseErrorTrace(stack: string): ErrorTrace {
 }
 
 function parseErrorStackTrace(stack: string): ErrorStackTrace[] {
-  return stack.split('\n').slice(1).map((line) => {
+  return stack.split(/\r?\n/).slice(1).map((line) => {
     const parsed = stackTraceLineRegex.exec(line);
     if (parsed) {
       return {
@@ -58,7 +60,7 @@ function parseErrorStackTrace(stack: string): ErrorStackTrace[] {
     } else {
       return undefined;
     }
-  }).filter(valid => !!valid) as ErrorStackTrace[];
+  }).filter(valid => Boolean(valid)) as ErrorStackTrace[];
 }
 
 function collectEnvironmentData(): Environment {
@@ -74,4 +76,4 @@ function collectEnvironmentData(): Environment {
   };
 }
 
-(<any> window)['InitializeErrorTracker'] = InitializeErrorTracker;
+(window as any)['InitializeErrorTracker'] = InitializeErrorTracker;
