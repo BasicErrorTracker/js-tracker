@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Tester</title>
+
+    <script src="dist/error-tracker.min.js"></script>
+</head>
+<body>
+
+<button id="culprit" onclick="fun1()">Generate Error</button>
+
+<script>
+    InitializeErrorTracker((error) => {
+        console.error(JSON.stringify(error));
+    });
+
+    function fun3() {
+        throw new Error("BUTTON")
+    }
+
+    function fun2() {
+        fun3()
+    }
+
+    function fun1() {
+        fun2()
+    }
+</script>
+</body>
+</html>
