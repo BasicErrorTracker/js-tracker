@@ -7,16 +7,20 @@ let sessionId: string;
 
 const stackTraceLineRegex = /^\s+at\s(\S+)\s\((.+):(\d+):(\d+)\)$/;
 
-function InitializeErrorTracker() {
+function InitializeErrorTracker(callback?: (report: ErrorReport) => number) {
   sessionId = generateUUIDv4();
 
-  window.addEventListener("error", ReportError);
+  window.addEventListener("error", ReportError(callback));
 
   console.debug('Error Tracker Initialized!');
 }
 
-export default function ReportError(error: ErrorEvent) {
-  console.log(prepareReport(error));
+export default function ReportError(callback?: (report: ErrorReport) => number) {
+  return (error: ErrorEvent) => {
+    const report = prepareReport(error);
+    callback && callback(report);
+    // TODO Send error to server
+  }
 }
 
 function prepareReport(error: ErrorEvent): ErrorReport {

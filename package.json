@@ -9,7 +9,8 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "webpack --mode production",
-    "build:js:watch": "webpack --mode production --watch"
+    "build:js:watch": "webpack --mode production --watch",
+    "selenium:run": "node selenium/run.js"
   },
   "author": "Basic Error Tracker Team",
   "license": "OSL-3.0",
@@ -26,6 +27,7 @@
     "@babel/preset-typescript": "^7.6.0",
     "babel-loader": "^8.0.4",
     "babel-preset-minify": "^0.5.1",
+    "selenium-webdriver": "^4.0.0-alpha.5",
     "typescript": "^3.6.4",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
